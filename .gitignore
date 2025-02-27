@@ -21,6 +21,7 @@ eggs/
 .eggs/
 *.egg-info/
 .installed.cfg
+venv/
 
 # System
 .DS_Store

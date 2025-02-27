@@ -1,0 +1,23 @@
+# API keys and environment variables
+.env
+
+# Output files
+output_files/
+processed/
+extraction_summary.json
+
+# Log files
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+build/
+dist/
+eggs/
+.eggs/
+*.egg-info/
+.installed.cfg

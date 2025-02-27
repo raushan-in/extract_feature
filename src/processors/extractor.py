@@ -69,7 +69,7 @@ class FeatureExtractor:
             try:
                 extracted_features = self.client.extract_features(product_text)
                 normalized_features = normalize_features(
-                    extracted_features.dict(), self.client.features_list
+                    extracted_features, self.client.features_list
                 )
             except Exception as e:
                 logger.error(

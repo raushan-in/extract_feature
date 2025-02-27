@@ -1,6 +1,6 @@
 # Feature Extraction Tool
 
-A production-grade tool for extracting structured features from product descriptions using LLM.
+A tool for extracting structured features from product descriptions using LLM.
 
 ## Architecture
 
@@ -40,3 +40,8 @@ source venv/bin/activate
 ```bash
 pip install -e .
 ```
+
+3. Configure your API key:
+
+   - Copy `.env.sample` to `.env`
+   - Uncomment and add your API key for the service you'll use

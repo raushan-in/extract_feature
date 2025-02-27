@@ -70,7 +70,7 @@ class ConfigManager:
         
         for env_var, config_path in env_mappings.items():
             if env_var in os.environ:
-                value = os.environ[env_var]
+                value = os.environ[env_var].strip()
                 
                 # Convert value to appropriate type
                 if config_path[0] == "processing" and config_path[1] == "batch_size":

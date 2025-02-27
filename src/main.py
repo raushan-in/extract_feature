@@ -18,7 +18,7 @@ def main():
     Main entry point for the feature extraction application.
     """
     try:
-        load_dotenv()
+        load_dotenv(override=True)
     except Exception as e:
         print(f"Warning: Could not load .env file: {e}")
     

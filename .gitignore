@@ -1,9 +1,10 @@
 # API keys and environment variables
 .env
 
-# Output files
+# Resources/files
+input_files/
 output_files/
-processed/
+processed_files/
 extraction_summary.json
 
 # Log files

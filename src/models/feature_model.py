@@ -3,7 +3,7 @@ Pydantic models for feature extraction.
 """
 
 from typing import Any, Dict, List, Optional
-from langchain_core.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 
 
 class ExtractedFeatures:

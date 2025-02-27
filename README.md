@@ -18,24 +18,27 @@ feature_extraction/
 
 ## Setup
 
-1. virtual environment
+- `Python3.10` is required
 
-# Create
+1. Virtual Environment [Optional]
+
+- create
 ```bash
-python -m venv venv
+python3 -m venv venv
 ```
 
-# On Windows:
+ - Actvate on Windows:
+
 ```bash
 venv\Scripts\activate
 ```
 
-# On macOS/Linux:
+ - Actiavte on macOS/Linux:
 ```bash
 source venv/bin/activate
 ```
 
-2. Install the package:
+2. Install the package: [Required]
 
 ```bash
 pip install -e .
@@ -43,15 +46,20 @@ pip install -e .
 
 3. Configure your API key:
 
-   - Copy `.env.sample` to `.env`
+- Create `.env`
+```bash
+cp .env.sample .env
+```
+
    - Uncomment and add your API key for the service you'll use
 
-# Regular useses
+4. Add input files
 
-4. Place your product files in the input directory (default: `input_files/`)
+- Place your product files in the input directory (default: `input_files/`)
 
 
-### Basic Usage
+## Start Execution  🚀
+- App start
 
 ```bash
 extract-features

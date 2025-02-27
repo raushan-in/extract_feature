@@ -1,1 +1,6 @@
 pandas
+langchain-core
+langchain-openai
+langchain-anthropic
+langchain-groq
+python-dotenv

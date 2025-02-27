@@ -90,7 +90,7 @@ class BaseLLMClient:
                         retry_delay *= 2  # Exponential backoff
                     else:
                         logger.error(
-                            f"LLM processing failed after {max_retries} attempts: {str(e)}"
+                            f"🆘 LLM processing failed after max {max_retries} attempts: {str(e)}"
                         )
                         raise
 

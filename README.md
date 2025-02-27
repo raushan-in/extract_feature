@@ -125,4 +125,4 @@ Edit the prompt templates in `src/prompts/templates.py`
 
 ### Adding New Features
 
-Simply add them to your `features.txt` file - the system will automatically generate models for them.
+Simply add them to `features/features.txt` file - the system will automatically identify them.

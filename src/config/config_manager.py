@@ -16,7 +16,7 @@ DEFAULT_CONFIG = {
         "model": None
     },
     "paths": {
-        "features": "features.txt",
+        "features": "features/features.txt",
         "input_dir": "input_files",
         "output_dir": "output_files",
         "processed_dir": "processed_files",

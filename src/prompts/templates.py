@@ -8,10 +8,10 @@ from langchain_core.prompts import PromptTemplate
 def get_feature_extraction_prompt(format_instructions: str) -> PromptTemplate:
     """
     Creates a prompt template for extracting features from product descriptions.
-    
+
     Args:
         format_instructions: Instructions for formatting the output (from output parser)
-        
+
     Returns:
         A PromptTemplate object configured for feature extraction
     """
@@ -36,5 +36,5 @@ def get_feature_extraction_prompt(format_instructions: str) -> PromptTemplate:
         {format_instructions}
         """,
         input_variables=["product_text", "features_list"],
-        partial_variables={"format_instructions": format_instructions}
+        partial_variables={"format_instructions": format_instructions},
     )

@@ -3,16 +3,16 @@ Batch processing for multiple product files.
 """
 
 import glob
-import json
 import logging
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 from typing import Dict
 
 from tqdm import tqdm
 
 from ..llm.base import BaseLLMClient
-from ..utils.file_utils import ensure_directories
+from ..utils.file_utils import ensure_directories, write_to_json_file
 from .extractor import FeatureExtractor
 
 logger = logging.getLogger(__name__)
@@ -119,20 +119,17 @@ class BatchProcessor:
         )
 
         summary = {
+            "model_used": self.client.model_name,
             "total_files": total_files,
             "processed_files": len(results),
             "success_count": success_count,
             "error_count": error_count,
             "success_rate": success_rate,
+            "timestamp": datetime.now().isoformat(),
             "files": results,
         }
 
         # Save summary to file
-        try:
-            with open("extraction_summary.json", "w", encoding="utf-8") as f:
-                json.dump(summary, f, indent=2)
-            logger.info("Wrote processing summary to extraction_summary.json")
-        except Exception as e:
-            logger.warning(f"Failed to write summary report: {str(e)}")
+        write_to_json_file(summary, "extraction_summary.json")
 
         return summary

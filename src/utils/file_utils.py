@@ -2,6 +2,7 @@
 File utility functions for the feature extraction system.
 """
 
+import json
 import logging
 import os
 import shutil
@@ -183,3 +184,44 @@ def ensure_directories(directories: List[str]) -> None:
         except Exception as e:
             logger.error(f"Failed to create directory {directory}: {str(e)}")
             raise
+
+
+def write_to_json_file(content: Dict, file_path: str) -> str:
+    """
+    Write data to JSON file in append mode.
+
+    Args:
+        data: Dictionary of extracted features
+        file_path: path to write the output file
+
+    Returns:
+        Path to the created JSON file
+
+    Raises:
+        IOError: If the file cannot be written
+    """
+    try:
+        if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
+            # File exists and is not empty
+            with open(file_path, "r", encoding="utf-8") as f:
+                try:
+                    data = json.load(f)
+                    if not isinstance(data, list):
+                        data = [data]
+                except json.JSONDecodeError:
+                    # File exists but isn't valid JSON or is empty
+                    data = []
+        else:
+            # File doesn't exist or is empty
+            data = []
+
+        # Append the new summary
+        data.append(content)
+
+        # Write the updated list back to the file
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+
+        logger.info(f"Wrote to {file_path}")
+    except Exception as e:
+        logger.warning(f"Failed to write in {file_path}: {str(e)}")

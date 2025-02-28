@@ -9,9 +9,6 @@ def get_feature_extraction_prompt() -> PromptTemplate:
     """
     Creates a prompt template for extracting features from product descriptions.
 
-    Args:
-        format_instructions: Instructions for formatting the output (from output parser)
-
     Returns:
         A PromptTemplate object configured for feature extraction
     """
@@ -25,8 +22,17 @@ def get_feature_extraction_prompt() -> PromptTemplate:
         
         Rules:
         - Use null for missing values
-        - Extract only numbers without units
+        - Extract only numbers without units (e.g. 5 instead of 5 mm, 26.3 instead of 26.3 kW)
+        - Ensure that the extracted values are normalized (e.g. "5/3 mm" should be "1.67")
         - For boolean features use true/false
+        - Don't guess values that aren't directly stated or clearly implied
+        - If a feature has a range (e.g., "5-10 kW"), extract the maximum value (10)
+        - Format percentage values as decimals (0.25 instead of 25%)
+        - Unit Standardization:
+            - Convert all weights to grams (g)
+            - Convert all volumes to liters (L)
+            - Convert all temperatures to degrees Celsius (°C)
+            - Convert all power ratings to kilowatts (kW)
         
         Return format: {{ "feature1": value1, "feature2": value2, ... }}
         """,

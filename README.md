@@ -124,9 +124,18 @@ python -m unittest tests/test_feature_extraction.py
 1. Create a new client implementation in `src/llm/`
 2. Update the factory in `src/llm/factory.py`
 
-### Customizing Prompts
+### Customizing Prompts (Prompt Engneering)
 
 Edit the prompt templates in `src/prompts/templates.py`
+
+### Unit Standardization:
+   - Convert all weights to grams (g)
+   - Convert all volumes to liters (L)
+   - Convert all temperatures to degrees Celsius (°C)
+   - Convert all power ratings to kilowatts (kW)
+
+   Additional units can be added in prompt template.
+
 
 ### Adding New Features
 

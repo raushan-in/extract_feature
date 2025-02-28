@@ -96,7 +96,7 @@ Configure the tool using any of these methods (in order of precedence):
 |---------|--------------|---------|-------------|
 | LLM Provider | `LLM_PROVIDER` | `openai` | LLM API provider (openai, anthropic, groq) |
 | LLM Model | `LLM_MODEL` | *provider default* | Specific model to use |
-| Features File | `FEATURES_FILE` | `features.txt` | Path to features definition file |
+| Features File | `FEATURES_FILE` | `features/features.txt` | Path to features definition file |
 | Input Directory | `INPUT_DIR` | `input_files` | Where to find product files |
 | Output Directory | `OUTPUT_DIR` | `output_files` | Where to save extracted data |
 | Processed Directory | `PROCESSED_DIR` | `processed_files` | Where to move processed files |

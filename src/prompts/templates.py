@@ -5,7 +5,7 @@ Prompt templates for feature extraction.
 from langchain_core.prompts import PromptTemplate
 
 
-def get_feature_extraction_prompt(format_instructions: str) -> PromptTemplate:
+def get_feature_extraction_prompt() -> PromptTemplate:
     """
     Creates a prompt template for extracting features from product descriptions.
 
@@ -30,5 +30,5 @@ def get_feature_extraction_prompt(format_instructions: str) -> PromptTemplate:
         
         Return format: {{ "feature1": value1, "feature2": value2, ... }}
         """,
-        input_variables=["product_text", "features_list"]
+        input_variables=["product_text", "features_list"],
     )

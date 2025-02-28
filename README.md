@@ -9,7 +9,6 @@ feature_extraction/
 ├── src/                     # Source code
 │   ├── config/               # Configuration management
 │   ├── llm/                 # LLM client implementations
-│   ├── models/              # Data models and schemas
 │   ├── processors/          # Processing logic
 │   ├── prompts/             # LLM prompt templates
 │   ├── utils/               # Utility functions

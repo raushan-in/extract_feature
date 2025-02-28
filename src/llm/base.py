@@ -6,9 +6,6 @@ import logging
 import time
 from typing import Any, Dict, List
 
-from langchain.output_parsers import PydanticOutputParser, ListOutputParser
-
-from ..models.feature_model import ExtractedFeatures
 from ..prompts.templates import get_feature_extraction_prompt
 
 logger = logging.getLogger(__name__)
@@ -31,8 +28,6 @@ class BaseLLMClient:
         self.api_key = api_key
         self.model_name = model_name
         self.features_list = features_list
-        self.feature_model = ExtractedFeatures.create_model_class(features_list)
-        self.parser = PydanticOutputParser(pydantic_object=self.feature_model)
         self.llm = None
         self._setup_prompt_template()
 
@@ -40,9 +35,7 @@ class BaseLLMClient:
         """
         Set up the prompt template with format instructions.
         """
-        self.prompt_template = get_feature_extraction_prompt(
-            self.parser.get_format_instructions()
-        )
+        self.prompt_template = get_feature_extraction_prompt()
 
     def extract_features(self, product_text: str) -> Dict[str, Any]:
         """
@@ -52,7 +45,8 @@ class BaseLLMClient:
             product_text: Text description of the product
 
         Returns:
-            Dictionary of extracted features and total tokens consumed
+            Dictionary of extracted features and total tokens consumed. \n
+            {"extracted_features": <JSON str> , "tokens_consumed": <dict>}
 
         Raises:
             ValueError: If the LLM client is not initialized
@@ -77,19 +71,21 @@ class BaseLLMClient:
             for attempt in range(max_retries):
                 try:
                     response = self.llm.invoke(prompt_value)
-                    # parsed_result = self.parser.parse(response)
-                    
-                    if hasattr(response, 'content'):
+
+                    if hasattr(response, "content"):
                         response_text = response.content
 
-                    if hasattr(response, 'usage_metadata'):
+                    if hasattr(response, "usage_metadata"):
                         tokens_consumed = response.usage_metadata
 
                     logger.debug(
                         f"Successfully extracted features on attempt {attempt+1}"
                     )
 
-                    return {"extracted_features": response_text , "tokens_consumed": tokens_consumed}
+                    return {
+                        "extracted_features": response_text,
+                        "tokens_consumed": tokens_consumed,
+                    }
                 except Exception as e:
                     if attempt < max_retries - 1:
                         logger.warning(

@@ -28,12 +28,7 @@ def get_feature_extraction_prompt() -> PromptTemplate:
         - Don't guess values that aren't directly stated or clearly implied
         - If a feature has a range (e.g., "5-10 kW"), extract the maximum value (10)
         - Format percentage values as decimals (0.25 instead of 25%)
-        - Unit Standardization:
-            - Convert all weights to grams (g)
-            - Convert all volumes to liters (L)
-            - Convert all temperatures to degrees Celsius (°C)
-            - Convert all power ratings to kilowatts (kW)
-        
+
         Return format: {{ "feature1": value1, "feature2": value2, ... }}
         """,
         input_variables=["product_text", "features_list"],

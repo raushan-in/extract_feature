@@ -6,7 +6,7 @@ import logging
 import time
 from typing import Any, Dict, List
 
-from langchain.output_parsers import PydanticOutputParser
+from langchain.output_parsers import PydanticOutputParser, ListOutputParser
 
 from ..models.feature_model import ExtractedFeatures
 from ..prompts.templates import get_feature_extraction_prompt
@@ -52,7 +52,7 @@ class BaseLLMClient:
             product_text: Text description of the product
 
         Returns:
-            Dictionary of extracted features
+            Dictionary of extracted features and total tokens consumed
 
         Raises:
             ValueError: If the LLM client is not initialized
@@ -72,15 +72,24 @@ class BaseLLMClient:
             # Add retry logic
             max_retries = 3
             retry_delay = 2  # seconds
+            tokens_consumed = {}
 
             for attempt in range(max_retries):
                 try:
-                    result = self.llm.invoke(prompt_value)
-                    parsed_result = self.parser.parse(result)
+                    response = self.llm.invoke(prompt_value)
+                    # parsed_result = self.parser.parse(response)
+                    
+                    if hasattr(response, 'content'):
+                        response_text = response.content
+
+                    if hasattr(response, 'usage_metadata'):
+                        tokens_consumed = response.usage_metadata
+
                     logger.debug(
                         f"Successfully extracted features on attempt {attempt+1}"
                     )
-                    return parsed_result
+
+                    return {"extracted_features": response_text , "tokens_consumed": tokens_consumed}
                 except Exception as e:
                     if attempt < max_retries - 1:
                         logger.warning(

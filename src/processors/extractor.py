@@ -6,7 +6,7 @@ import logging
 from typing import Any, Dict
 
 from ..llm.base import BaseLLMClient
-from ..models.feature_model import normalize_features
+from ..models.feature_model import normalize_features, parse_and_normalize_response
 from ..utils.file_utils import (
     load_product_description,
     move_to_processed,
@@ -50,6 +50,7 @@ class FeatureExtractor:
             "success": False,
             "features_found": 0,
             "error": None,
+            "tokens_consumed": {},
         }
 
         try:
@@ -67,10 +68,11 @@ class FeatureExtractor:
 
             # Extract features
             try:
-                extracted_features = self.client.extract_features(product_text)
-                normalized_features = normalize_features(
-                    extracted_features, self.client.features_list
+                response = self.client.extract_features(product_text)
+                normalized_features = parse_and_normalize_response(
+                    response['extracted_features'], self.client.features_list
                 )
+                result["tokens_consumed"] = response["tokens_consumed"]
             except Exception as e:
                 logger.error(
                     f"Feature extraction failed for {product_basename}: {str(e)}"

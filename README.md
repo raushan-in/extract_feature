@@ -131,3 +131,12 @@ Edit the prompt templates in `src/prompts/templates.py`
 ### Adding New Features
 
 Simply add them to `features/features.txt` file - the system will automatically identify them.
+
+
+## Key Features of the Application
+
+- **Multi-LLM Provider Support**: Seamlessly integrates with OpenAI, Anthropic, and Groq through a unified interface, allowing users to easily switch between different AI providers without code changes.
+- **Structured Data Extraction**: Extracts specific, structured features from unstructured product descriptions, converting free-form text into normalized, typed data (numbers, booleans, text) for analysis.
+- **Parallel Batch Processing**: Processes multiple files concurrently with a visual progress bar, significantly improving throughput when working with large product datasets.
+- **Flexible Configuration System**: Offers multiple configuration methods (environment variables, YAML config) with clear precedence, making it adaptable to different environments and use cases.
+- **Production-Grade Error Handling**: Implements comprehensive error recovery with retry mechanisms, detailed logging, and processing summaries that ensure reliability even when API calls fail.

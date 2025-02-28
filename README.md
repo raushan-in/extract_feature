@@ -111,6 +111,12 @@ Configure the tool using any of these methods (in order of precedence):
 - **Processed Files**: Original files are moved to the processed directory after extraction
 - **Error Files**: Files with errors are moved to `processed/errors/`
 
+## Unit Test (Testing)
+
+```bash
+python -m unittest tests/test_feature_extraction.py
+```
+
 ## Extending the Tool
 
 ### Adding a New LLM Provider

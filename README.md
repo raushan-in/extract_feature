@@ -1,4 +1,4 @@
-# Feature Extraction Tool
+# Feature Extraction AI Tool
 
 A tool for extracting structured features from product descriptions using LLM.
 
